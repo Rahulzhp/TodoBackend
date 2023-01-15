@@ -4,10 +4,11 @@ const app=express();
 const {connection}= require("./Config/db")
 const {TodoRouter}=require("./Routes/Todo.route")
 const {AuthRoute}=require("./Routes/Auth.route")
-
+var cors = require('cors')
 const {Auth}=require("./middlewre/Auth")
 require("dotenv").config()
 app.use(express.json())
+app.use(cors())
 
 app.get("/",(req,res)=>{
     res.send("welcome to home page");

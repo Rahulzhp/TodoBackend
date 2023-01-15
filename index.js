@@ -9,7 +9,8 @@ const {Auth}=require("./middlewre/Auth")
 require("dotenv").config()
 app.use(express.json())
 app.use(cors({
-    origin:"*"
+    "origin":"*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
 }))
 
 app.get("/",(req,res)=>{

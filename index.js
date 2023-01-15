@@ -4,13 +4,15 @@ const app=express();
 const {connection}= require("./Config/db")
 const {TodoRouter}=require("./Routes/Todo.route")
 const {AuthRoute}=require("./Routes/Auth.route")
-var cors = require('cors')
+const cors = require('cors')
 const {Auth}=require("./middlewre/Auth")
 require("dotenv").config()
 app.use(express.json())
 app.use(cors({
     "origin":"*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
 }))
 
 app.get("/",(req,res)=>{

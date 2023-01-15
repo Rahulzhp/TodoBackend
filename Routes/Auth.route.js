@@ -17,15 +17,15 @@ AuthRoute.post("/register", async (req, res) => {
         if (email.length > 0) {
             res.send("Email already registered")
         } else {
-            bcrypt.hash(Pass, 5, async (err, hased_pass) => {
-                if (err) {
-                    console.log("er")
-                } else {
-                    let user = new AuthModel({ Username, Email, Pass: hased_pass, DOB })
+            // bcrypt.hash(Pass, 5, async (err, hased_pass) => {
+            //     if (err) {
+            //         console.log("er")
+            //     } else {
+                    let user = new AuthModel({ Username, Email, Pass, DOB })
                     await user.save()
                     res.send({ "msg": "Registered Successfully" })
-                }
-            })
+            //     }
+            // })
         }
     }
     catch (er) {
@@ -38,15 +38,15 @@ AuthRoute.post("/login", async (req, res) => {
     try {
         let user = await AuthModel.find({Email,Pass})
         //console.log(user.Pass)
-        if (user) {
-            bcrypt.compare(Pass, user[0].Pass, function (er, result) {
-                if (result) {
+        if (user.length>0) {
+           // bcrypt.compare(Pass, user[0].Pass, function (er, result) {
+                // if (result) {
                     let token = jwt.sign({ course: user[0]._id }, "rhl")
                     res.send({ "msg": "Login Successfully", "token": token })
-                } else {
-                    res.send({ "er": "wrong credential" })
-                }
-            })
+            //     } else {
+            //         res.send({ "er": "wrong credential" })
+            //     }
+            // })
         }
         else {
             res.send({ "er": "wrong credential" })

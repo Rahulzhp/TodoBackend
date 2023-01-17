@@ -42,7 +42,7 @@ AuthRoute.post("/login", async (req, res) => {
            // bcrypt.compare(Pass, user[0].Pass, function (er, result) {
                 // if (result) {
                     let token = jwt.sign({ course: user[0]._id }, "rhl")
-                    res.send({ "msg": "Login Successfully", "token": token })
+                    res.send({ "msg": "Login Successfully", "token": token,"id":user[0]._id,"user":user })
             //     } else {
             //         res.send({ "er": "wrong credential" })
             //     }
